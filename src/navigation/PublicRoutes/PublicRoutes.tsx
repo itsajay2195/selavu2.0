@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from '../../screens/WelcomeScreen/WelcomeScreen';
+import PermissionsScreen from '../../screens/PermissionsScreen/PermissionsScreen';
 
 const Stack = createNativeStackNavigator();
 const PublicRoutes = () => {
@@ -13,6 +14,11 @@ const PublicRoutes = () => {
       <Stack.Screen
         name={'WELCOME_SCREEN'}
         component={WelcomeScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={'PERMISSIONS_SCREEN'}
+        component={PermissionsScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

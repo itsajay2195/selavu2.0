@@ -18,6 +18,7 @@ import {
   borderRadius,
 } from '../../theme';
 import InfoItem from './components/InfoItem';
+import {Storage} from '../../utils/storage';
 
 const PermissionsScreen = ({navigation}: any) => {
   const [isRequesting, setIsRequesting] = useState(false);
@@ -48,8 +49,10 @@ const PermissionsScreen = ({navigation}: any) => {
 
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('SMS permission granted');
+        Storage.setOnboardingCompleted();
+        Storage.setSMSPermissionGranted(true);
         // Navigate to loading/scanning screen
-        navigation.navigate('Dashboard');
+        navigation.navigate('DASHBOARD_SCREEN');
       } else {
         console.log('SMS permission denied');
         Alert.alert(
@@ -60,6 +63,7 @@ const PermissionsScreen = ({navigation}: any) => {
             {text: 'Try Again', onPress: () => requestSMSPermission()},
           ],
         );
+        Storage.setSMSPermissionGranted(false);
       }
     } catch (err) {
       console.warn(err);

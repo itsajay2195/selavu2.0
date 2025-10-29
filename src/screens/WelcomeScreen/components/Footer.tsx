@@ -2,12 +2,16 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors, fontSizes, fontWeights} from '../../../theme';
 
-const Footer = ({navigation}: any) => {
+const Footer = ({navigation, skipOnboarding}: any) => {
   return (
     <View style={styles.footer}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('PERMISSIONS_SCREEN')}>
+        onPress={() =>
+          navigation.navigate(
+            skipOnboarding ? 'DASHBOARD_SCREEN' : 'PERMISSIONS_SCREEN',
+          )
+        }>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
       <Text style={styles.footerText}>No account needed • Free forever</Text>

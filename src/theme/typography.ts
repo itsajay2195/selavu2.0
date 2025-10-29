@@ -9,7 +9,7 @@ export const fontSizes = {
   tiny: 12,
 };
 
-export const fontWeights = {
+export const fontWeights: any = {
   regular: '400',
   medium: '500',
   semibold: '600',

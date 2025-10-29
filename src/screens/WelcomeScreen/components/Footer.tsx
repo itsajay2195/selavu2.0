@@ -7,7 +7,7 @@ const Footer = ({navigation}: any) => {
     <View style={styles.footer}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Permissions')}>
+        onPress={() => navigation.navigate('PERMISSIONS_SCREEN')}>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
       <Text style={styles.footerText}>No account needed • Free forever</Text>

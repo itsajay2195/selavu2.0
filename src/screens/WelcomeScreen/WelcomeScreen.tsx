@@ -12,7 +12,7 @@ const WelcomeScreen = ({navigation}: any) => {
       colors={[colors.gradient.start, colors.gradient.end]}
       style={styles.container}>
       <Body />
-      <Footer />
+      <Footer navigation={navigation} />
     </LinearGradient>
   );
 };

@@ -4,9 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from '../../screens/WelcomeScreen/WelcomeScreen';
 import PermissionsScreen from '../../screens/PermissionsScreen/PermissionsScreen';
 import DashboardScreen from '../../screens/DashboardScreen/DashboardScreen';
+import {Storage} from '../../utils/storage';
+import LoadingScreen from '../../screens/LoadingScreen/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
-const PublicRoutes = () => {
+
+const OnBoardingStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -22,6 +25,21 @@ const PublicRoutes = () => {
         component={PermissionsScreen}
         options={{headerShown: false}}
       />
+    </Stack.Navigator>
+  );
+};
+
+const MainStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen
+        name={'LOADING_SCREEN'}
+        component={LoadingScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name={'DASHBOARD_SCREEN'}
         component={DashboardScreen}
@@ -29,6 +47,11 @@ const PublicRoutes = () => {
       />
     </Stack.Navigator>
   );
+};
+
+const PublicRoutes = () => {
+  const onboarded = Storage.isOnboardingCompleted();
+  return onboarded ? <MainStack /> : <OnBoardingStack />;
 };
 
 export default PublicRoutes;

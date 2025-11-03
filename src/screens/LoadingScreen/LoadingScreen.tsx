@@ -3,7 +3,8 @@ import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors, fontSizes} from '../../theme';
 import {readSmsFromDevice} from '../../services/smsReader';
-import {processAllSMS} from '../../services/smsProcessor';
+import {processAllSmsAI} from '../../services/smsProcessor';
+import {ensureAiReady} from '../../onnx/aiInit';
 
 const LoadingScreen = ({navigation}: any) => {
   const [status, setStatus] = useState('Reading your SMS...');
@@ -16,13 +17,17 @@ const LoadingScreen = ({navigation}: any) => {
   const loadData = async () => {
     try {
       // Read SMS
+      setStatus('Preparing AI...');
+      await ensureAiReady();
       setStatus('Reading your SMS...');
-      const messages = await readSmsFromDevice(90);
+      const messages: any[] = await readSmsFromDevice(90);
       setProgress(30);
 
       // Process SMS
       setStatus(`Processing ${messages.length} messages...`);
-      await processAllSMS(messages);
+      // setTimeout(async () => {
+      await processAllSmsAI(messages);
+      // }, 10000);
       setProgress(80);
 
       // Done
